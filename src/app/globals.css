@@ -1,0 +1,284 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Nexora design tokens.
+ * Нейтральная база + один фирменный акцент (Nexora violet).
+ * Цвета графиков проверены на различимость (в т.ч. для дальтоников)
+ * отдельно для светлой и тёмной темы — менять только набором.
+ */
+:root {
+  --canvas: #f6f6f9;
+  --background: #ffffff;
+  --foreground: #171721;
+  --card: #ffffff;
+  --card-foreground: #171721;
+  --popover: #ffffff;
+  --popover-foreground: #171721;
+
+  --primary: #6047e0;
+  --primary-hover: #5335cf;
+  --primary-foreground: #ffffff;
+  --primary-soft: #edeeff;
+
+  --secondary: #f1f1f5;
+  --secondary-foreground: #24242e;
+  --muted: #f3f3f6;
+  --muted-foreground: #676873;
+  --accent: #f0f0f4;
+  --accent-foreground: #171721;
+
+  --border: #e6e6ea;
+  --input: #dedee4;
+  --ring: #6047e0;
+
+  /* статусы: всегда вместе с иконкой и подписью */
+  --destructive: #d03b3b;
+  --success: #0ca30c;
+  --warning: #fab219;
+  --serious: #ec835a;
+  --success-text: #006300;
+  --warning-text: #905d00;
+  --critical-text: #be222a;
+
+  /* этапы воронки — порядковая шкала одного оттенка */
+  --stage-new: #a7a8f5;
+  --stage-contact: #8986e6;
+  --stage-qualification: #6d64d7;
+  --stage-proposal: #543ec6;
+  --stage-negotiation: #4000b5;
+  --stage-won: #0ca30c;
+  --stage-lost: #d03b3b;
+
+  /* источники лидов — цвет закреплён за источником */
+  --src-instagram: #e87ba4;
+  --src-max: #4a3aa7;
+  --src-website: #eb6834;
+  --src-telegram: #2a78d6;
+  --src-whatsapp: #1baf7a;
+  --src-vk: #008300;
+  --src-referral: #eda100;
+  --src-other: #9a9aa6;
+
+  --chart-1: #6047e0;
+  --chart-muted: #c4c4cd;
+  --chart-grid: #ececf0;
+
+  --sidebar: #f6f6f9;
+  --sidebar-foreground: #4a4a57;
+  --sidebar-accent: #ebebf0;
+  --sidebar-border: #e6e6ea;
+
+  --elevation-1: 0 1px 2px 0 rgb(23 23 33 / 0.04);
+  --elevation-2: 0 2px 6px -1px rgb(23 23 33 / 0.06), 0 14px 32px -14px rgb(23 23 33 / 0.18);
+  --elevation-3: 0 10px 28px -10px rgb(23 23 33 / 0.18), 0 32px 64px -24px rgb(23 23 33 / 0.26);
+}
+
+.dark {
+  --canvas: #101014;
+  --background: #19191e;
+  --foreground: #f2f2f5;
+  --card: #1d1d23;
+  --card-foreground: #f2f2f5;
+  --popover: #212128;
+  --popover-foreground: #f2f2f5;
+
+  --primary: #8c88f7;
+  --primary-hover: #9d99fb;
+  --primary-foreground: #14131f;
+  --primary-soft: #232243;
+
+  --secondary: #26262d;
+  --secondary-foreground: #e6e6ec;
+  --muted: #222228;
+  --muted-foreground: #a0a0ab;
+  --accent: #26262e;
+  --accent-foreground: #f2f2f5;
+
+  --border: rgb(255 255 255 / 0.08);
+  --input: rgb(255 255 255 / 0.12);
+  --ring: #8c88f7;
+
+  --destructive: #e15b5b;
+  --success-text: #5bc663;
+  --warning-text: #f1bf4e;
+  --critical-text: #f47b74;
+
+  --stage-new: #4b41a1;
+  --stage-contact: #645dc0;
+  --stage-qualification: #7e7ae0;
+  --stage-proposal: #9a98ff;
+  --stage-negotiation: #b7b6ff;
+
+  --src-instagram: #d55181;
+  --src-max: #9085e9;
+  --src-website: #d95926;
+  --src-telegram: #3987e5;
+  --src-whatsapp: #199e70;
+  --src-referral: #c98500;
+  --src-other: #6f6f7b;
+
+  --chart-1: #8c88f7;
+  --chart-muted: #4a4a55;
+  --chart-grid: rgb(255 255 255 / 0.07);
+
+  --sidebar: #101014;
+  --sidebar-foreground: #b4b4be;
+  --sidebar-accent: #1f1f25;
+  --sidebar-border: rgb(255 255 255 / 0.06);
+
+  --elevation-1: 0 1px 2px 0 rgb(0 0 0 / 0.35);
+  --elevation-2: 0 2px 6px -1px rgb(0 0 0 / 0.4), 0 14px 32px -14px rgb(0 0 0 / 0.6);
+  --elevation-3: 0 10px 28px -10px rgb(0 0 0 / 0.5), 0 32px 64px -24px rgb(0 0 0 / 0.7);
+}
+
+@theme inline {
+  --font-sans: "Onest Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --color-canvas: var(--canvas);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-serious: var(--serious);
+  --color-success-text: var(--success-text);
+  --color-warning-text: var(--warning-text);
+  --color-critical-text: var(--critical-text);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-chart-1: var(--chart-1);
+  --color-chart-grid: var(--chart-grid);
+
+  --animate-shimmer: shimmer 1.6s ease-in-out infinite;
+  --animate-pop: pop 0.38s cubic-bezier(0.2, 0.9, 0.3, 1.25);
+  --animate-page: page-in 0.32s cubic-bezier(0.2, 0, 0, 1);
+
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  @keyframes pop {
+    0% {
+      transform: scale(0.5);
+      opacity: 0;
+    }
+    70% {
+      transform: scale(1.12);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes page-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@utility shadow-card {
+  box-shadow: var(--elevation-1);
+}
+@utility shadow-raised {
+  box-shadow: var(--elevation-2);
+}
+@utility shadow-overlay {
+  box-shadow: var(--elevation-3);
+}
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+@utility scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "calt";
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--primary) 22%, transparent);
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+/* Recharts: убираем системный фокус-контур у SVG, фокус показываем своими средствами */
+.recharts-wrapper *:focus,
+.recharts-surface:focus {
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Печать документов: чистый лист A4 без интерфейса */
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm;
+  }
+  html,
+  body {
+    background: #fff !important;
+  }
+  [data-sonner-toaster] {
+    display: none !important;
+  }
+}
